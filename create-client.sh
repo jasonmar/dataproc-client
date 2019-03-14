@@ -59,7 +59,7 @@ chmod 777 launch-agent.sh
 
 
 cd /usr/local/share/google/dataproc
-chmod 777 lstartup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
+chmod 777 tartup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
 ./startup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
 # to-do  this file may change name 
 
