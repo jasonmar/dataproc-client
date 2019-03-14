@@ -1,0 +1,21 @@
+# this is to be used after phase 1 is done. This will call hue-configure.sh, hostname-configure.sh etc that 
+# swaps the configuration settings needed after deploying with image created for phase
+
+
+[Unit]
+Description=Configure client to allow Hue to query remote Dataproc cluster
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=oneshot
+Restart=always
+RestartSec=1
+User=airflow
+Group=airflow
+ExecStart=/bin/bash /usr/bin/hue-configure.sh
+
+[Install]
+WantedBy=multi-user.target
+
+
