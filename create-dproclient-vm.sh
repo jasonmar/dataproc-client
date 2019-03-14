@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-clonedir=dataproc-client-vm
-git clone https://github.com/JessieJingxuGao/dataproc-client-vm-startup $clonedir
-cd $clonedir
+#clonedir=dataproc-client-vm
+#git clone https://github.com/JessieJingxuGao/dataproc-client-vm-startup $clonedir
+#cd $clonedir
 
 . metadata.config
 
