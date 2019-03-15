@@ -8,7 +8,7 @@ This repository provides a startup script and instructions for creating a Datapr
 1. Clone this repo and go the the directory
 ```
 git clone https://github.com/JessieJingxuGao/dataproc-client-vm-startup.git
-cd dataproc-client-vm
+cd dataproc-client-vm-startup
 ```
 
 2. Change permission of the create-dproclient-vm.sh
