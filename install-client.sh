@@ -33,9 +33,9 @@ chmod 777 startup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
 
 
 
-
 gsutil cp gs://$gsbucket/zeppelin.sh /huezep/
 gsutil cp gs://$gsbucket/hue.sh /huezep/
+cd /huezep
 chmod 777 hue.sh
 ./hue.sh
 # bash -v hue.sh
