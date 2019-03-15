@@ -18,7 +18,7 @@ chmod 777 create-dproclient-vm.sh
 
 3. Modify the [metadata.config](metadata.config) file: replacing `my-project` `my-dataproc-client` `my-service-account` `my-dataproc-cluster` and `my-bucket` with your own values. `my-dataproc-cluster` is the name of the dataproc cluster you want to create a client for.
 
-4. Run the [create-client.sh](create-client.sh) file.
+4. Run the [create-dproclient.sh](create-dproclient.sh) file.
 ```
 ./create-dproclient-vm.sh
 ```
