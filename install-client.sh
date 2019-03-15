@@ -37,9 +37,12 @@ gsutil cp gs://$gsbucket/zeppelin.sh /huezep/
 gsutil cp gs://$gsbucket/hue.sh /huezep/
 cd /huezep
 chmod 777 hue.sh
-./hue.sh
+# ./hue.sh
 # bash -v hue.sh
-#bash zeppelin.sh
+# bash zeppelin.sh
+
+chmod777 zeppeline.sh
+./zeppelin.sh
 
 # for hue configuration
 sudo perl -pi -e s/hive_server_host=${YOUR_CLIENT}-m.c.${YOUR_PROJECT}.internal/hive_server_host=${YOUR_TARGET_CLUSTER}-m.c.${YOUR_PROJECT}.internal/ /etc/hue/conf/hue.ini
