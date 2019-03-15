@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#sudo su
+sudo su
 cd /
 mkdir huezep
 cd huezep
