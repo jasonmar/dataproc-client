@@ -52,7 +52,7 @@ Then, the Zeppelin configurations needed to allow Zeppelin to connect with the t
 Note: The following two erros can be ignored:
 - During the process running [hue.sh](hue.sh), Hue installation process will try to restart and hadoop-hdfs-namenode, as we have swapped the `MASTER_HOSTNAMES` with the remote Dataproc server, this will pop up error 'Unable to restart hadoop-hdfs-namenode'. It will not stop the following process and this error can be ignored.
 - When first time openning Hue web UI, the below error will pop up but can be ignored. There should be no problem running Hive queres that run on the server machine.
-`Solr server could not be contacted properly: HTTPConnectionPool(host='test-client-new-finalized-m.c.retail-poc-demo.internal', port=8983): Max retries exceeded with url: /solr/admin/info/system?user.name=hue&doAs=admin&wt=json (Caused by NewConnectionError(': Failed to establish a new connection: [Errno 111] Connection refused',))`
+`Solr server could not be contacted properly: HTTPConnectionPool(host='......', port=8983): Max retries exceeded with url: /solr/admin/info/system?user.name=hue&doAs=admin&wt=json (Caused by NewConnectionError(': Failed to establish a new connection: [Errno 111] Connection refused',))`
 
 
 ## Trouble-shooting suggestions
