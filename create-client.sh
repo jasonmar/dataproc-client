@@ -64,8 +64,11 @@ chmod 777 tartup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
 # to-do  this file may change name 
 
 cd /client-creation
-bash hue.sh
-bash zeppelin.sh
+chmod 777 hue.sh
+./hue.sh
+
+#chmod 777 zeppelin.sh
+#bash zeppelin.sh
 
 # todo 
 # no need now: add fix for hue for the mysql deny error: 
