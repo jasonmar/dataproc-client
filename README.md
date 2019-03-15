@@ -68,12 +68,22 @@ It may be a simple fix to match the python env on both machines after the client
 
 
 
-## MISC
-1. Create client dataproc vm with network flag that has filewall settings of 1) openning ports for spark history server web ui, hue web ui, zeppelin web ui 2) open hive, spark service ports from client to server
+## Test
+1. Find the Dataproc Server cluster name and the image version to be referenced in the automation script
+2. Decide the network tag to be used for the Dataproc client VM and use that to set up the firewall rules for the following ports to be opened.
+- Hive: 10000 (hive server),9083 (hive metastore) - client to master
+- spark: 7077 (spark master port),7078 (spark worker port) - client to master
+- Hue web server: 8888 - user terminal to client
+- Zeppelin web server: 8080 - user terminal to client
+- Spark web server: 18080 (spark master web ui port), 18081  (spark worker web ui port) - user temrinal to master
+3. Create Client Dataproc VM with the above instructions
+4. Validate the success criterion have been met
+- Test Hive CLI: User should be able to query tables stored on master Dataproc hive server
+- Test Spark Shell ( `spark-shell` for scala and `pyspark` for python): The job submitted on client VM should be shown on master Dataproc spark history-server UI (http://<spark_host_ip>:18080)
+- Test spark-submit: The job submitted on client VM should be shown on master Dataproc spark history-server UI (http://<spark_host_ip>:18080)
+- Test running Hive Query from Zeppelin: User should be able to query tables stored on master Dataproc hive server
+- Test running Hive Query from Hue: User should be able to query tables stored on master Dataproc hive server
 
-2. Testing
-- running hive cli 
-- running spark shell (spark-shell/pyspark)
-- running spark-submit
-- running hive query from zeppelin
-- running hive query from hue
+## Remaining work
+- create templates
+- create vm from image and use systemd for running configuration changes needed from image
