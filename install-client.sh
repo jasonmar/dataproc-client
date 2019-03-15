@@ -41,7 +41,7 @@ chmod 777 hue.sh
 # bash -v hue.sh
 # bash zeppelin.sh
 
-chmod 777 zeppeline.sh
+chmod 777 zeppelin.sh
 ./zeppelin.sh
 
 . metadata.config
