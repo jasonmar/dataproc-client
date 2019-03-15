@@ -13,11 +13,15 @@ gsutil cp gs://$gsbucket/metadata.config /huezep/
 
 gsutil cp -r gs://$gsbucket/* /huezep/
 
-target="$(/usr/share/google/get_metadata_value attributes/target-dataproc-cluster)-m"
-echo $target
-echo $script
-sed -i -e "s|^MASTER_HOSTNAMES=.*|MASTER_HOSTNAMES=($target)|" -e 's|export KERBEROS_ENABLED|return;export KERBEROS_ENABLED|' $script
-echo $script
+# target="$(/usr/share/google/get_metadata_value attributes/target-dataproc-cluster)-m"
+# echo $target
+# echo $script
+# sed -i -e "s|^MASTER_HOSTNAMES=.*|MASTER_HOSTNAMES=($target)|" -e 's|export KERBEROS_ENABLED|return;export KERBEROS_ENABLED|' $script
+# echo $script
+
+chmod 777 startup.sh
+./startup.sh 
+
 
 cd /usr/local/share/google/dataproc  
 chmod 777 launch-agent.sh 
@@ -32,7 +36,9 @@ chmod 777 startup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
 
 gsutil cp gs://$gsbucket/zeppelin.sh /huezep/
 gsutil cp gs://$gsbucket/hue.sh /huezep/
-bash -v hue.sh
+chmod 777 hue.sh
+./hue.sh
+# bash -v hue.sh
 #bash zeppelin.sh
 
 # for hue configuration
