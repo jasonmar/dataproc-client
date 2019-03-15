@@ -64,7 +64,7 @@ ERROR org.apache.spark.deploy.yarn.ApplicationMaster: User class threw exception
 - Server side: Python 2.7.13 | /usr/bin/python 
 - Client side: Python 3.6.5 :: Anaconda, Inc.| /opt/conda/default/bin/python .  
 
-It may be a simple fix to match the python env on both machines after the client was created but it's suggested to select image with the same python package and same settings with the server during creation of the client. So the gcloud image-version flag in [create-client.sh](create-client.sh) should be "preview" if the server is using python3.5 with conda, or 1.3-deb9 (default as of March 2019) or older images that are using Python2.7.13 with python path /usr/bin/python.
+It may be a simple fix to match the python env on both machines after the client was created but it's suggested to select image with the same python package and same settings with the server during creation of the client. So the gcloud image-version flag in [create-dproclient-vm.sh](create-dproclient-vm.sh) should be "preview" if the server is using python3.5 with conda, or 1.3-deb9 (default as of March 2019) or older images that are using Python2.7.13 with python path /usr/bin/python.
 
 
 
