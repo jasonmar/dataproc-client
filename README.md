@@ -13,14 +13,14 @@ cd dataproc-client-vm
 
 2. Change permission of the create-client.sh
 ```
-chmod 777 create-client.sh
+chmod 777 create-dproclient-vm.sh
 ```
 
 3. Modify the [metadata.config](metadata.config) file: replacing `my-project` `my-dataproc-client` `my-service-account` `my-dataproc-cluster` and `my-bucket` with your own values. `my-dataproc-cluster` is the name of the dataproc cluster you want to create a client for.
 
 4. Run the [create-client.sh](create-client.sh) file.
 ```
-./create-client.sh
+./create-dproclient-vm.sh
 ```
 5. Access Zeppelin web UI (port:8080) and create a JDBC interpreter that connects Zeppelin with remote Dataproc cluster.
 - default.driver -> org.apache.hive.jdbc.HiveDriver
@@ -31,9 +31,14 @@ chmod 777 create-client.sh
 
 ## How this works
 
-The [create-client.sh](create-client.sh) contains the the following
+The [create-dproclient-vm.sh](create-dproclient-vm.sh) contains the the following
 
-- gcloud command that starts a Dataproc cluster with metadata variable `target-dataproc-cluster` passed to the client environment. 
+- gcloud command that starts a Dataproc cluster serving as client with metadata variables for target cluster name and Cloud storage bucket name used to store those configurations files passed to the client environment. 
+
+- SSH into the Dataproc client VM and run the  [install-client.sh](install-client.sh)
+
+
+The [install-client.sh](install-client.sh) contains the the following
 
 - The [startup.sh](startup.sh) replaces the `MASTER_HOSTNAMES` variable to use the master hostname of the target dataproc cluster. Then the Dataproc created files `/usr/local/share/google/dataproc/launch-agent.sh`, `/usr/local/share/google/dataproc/startup-script*.sh` will be run install services like Hadoop NameNode, YARN Resource Manager and Hive Metastore. When the script writes configuration files, all client software references the master of the target dataproc cluster. When starting `hive`, `spark-shell`, , `spark-submit`, the session will be created on the remote cluster instead of locally.
 
