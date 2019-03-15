@@ -11,7 +11,7 @@ git clone https://github.com/JessieJingxuGao/dataproc-client-vm-startup.git
 cd dataproc-client-vm
 ```
 
-2. Change permission of the create-client.sh
+2. Change permission of the create-dproclient-vm.sh
 ```
 chmod 777 create-dproclient-vm.sh
 ```
