@@ -10,10 +10,6 @@ echo $gsbucket
 gsutil cp gs://$gsbucket/metadata.config /huezep/
 . metadata.config
 
-gsutil cp gs://$gsbucket/zeppelin.sh /huezep/
-gsutil cp gs://$gsbucket/hue.sh /huezep/
-bash -v hue.sh
-#bash zeppelin.sh
 
 gsutil cp -r gs://$gsbucket/* /huezep/
 
@@ -31,6 +27,13 @@ cd /usr/local/share/google/dataproc
 chmod 777 startup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
 ./startup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
 
+
+
+
+gsutil cp gs://$gsbucket/zeppelin.sh /huezep/
+gsutil cp gs://$gsbucket/hue.sh /huezep/
+bash -v hue.sh
+#bash zeppelin.sh
 
 # for hue configuration
 sudo perl -pi -e s/hive_server_host=${YOUR_CLIENT}-m.c.${YOUR_PROJECT}.internal/hive_server_host=${YOUR_TARGET_CLUSTER}-m.c.${YOUR_PROJECT}.internal/ /etc/hue/conf/hue.ini
