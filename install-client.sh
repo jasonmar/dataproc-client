@@ -41,13 +41,16 @@ chmod 777 hue.sh
 # bash -v hue.sh
 # bash zeppelin.sh
 
-chmod777 zeppeline.sh
+chmod 777 zeppeline.sh
 ./zeppelin.sh
+
+. metadata.config
 
 # for hue configuration
 sudo perl -pi -e s/hive_server_host=${YOUR_CLIENT}-m.c.${YOUR_PROJECT}.internal/hive_server_host=${YOUR_TARGET_CLUSTER}-m.c.${YOUR_PROJECT}.internal/ /etc/hue/conf/hue.ini
 sudo perl -pi -e 's/## hive_server_port=10000/hive_server_port=10000/g' /etc/hue/conf/hue.ini
 
+systemctl restart hue
 
 logout
 exit
