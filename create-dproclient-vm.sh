@@ -23,14 +23,14 @@ fi
 
 gsutil -m cp -r * gs://${YOUR_BUCKET}
 
-gcloud beta dataproc clusters create ${YOUR_CLIENT} \
+gcloud dataproc clusters create ${YOUR_CLIENT} \
   --region $YOUR_REGION --subnet $YOUR_NETWORK --zone $YOUR_ZONE \
   --single-node --master-machine-type n1-standard-2 \
   --master-boot-disk-size 200 --image-version 1.3-deb9 \
   --tags $YOUR_CLIENT_TAG --project $YOUR_PROJECT \
   --service-account $YOUR_SERVICE_ACCOUNT \
-  --optional-components=ZEPPELIN \
   --metadata=target-dataproc-cluster=${YOUR_TARGET_CLUSTER},gs-bucket-name=${YOUR_BUCKET}
+#     --optional-components=ZEPPELIN \
  
  . metadata.config
  
