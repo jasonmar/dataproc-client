@@ -46,8 +46,10 @@ The [install-client.sh](install-client.sh) contains the the following
 
 - the scripts needed to swap the `/etc/hue/conf/hue.ini` hive_server_host setting to the target dataproc cluster instead of the local and also uncommented the hive_server_port configuration that are needed to have hue running query successfully.
 
-Then, the Zeppelin configurations needed to allow Zeppelin to connect with the target dataproc hive server are set in step #6 above through web server UI.
+Then, the Zeppelin configurations needed to allow Zeppelin to connect with the target dataproc hive server are set in step #6 above through web server UI.  
 
+
+Note: During the process running [hue.sh](hue.sh), Hue installation process will try to restart and hadoop-hdfs-namenode, as we have swapped the `MASTER_HOSTNAMES` with the remote Dataproc server, this will pop up error 'Unable to restart hadoop-hdfs-namenode'. It will not stop the following process and this error can be ignored.
 
 
 ## Trouble-shooting suggestions
