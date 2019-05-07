@@ -1,17 +1,17 @@
 #!/bin/bash
 
-sudo su
-cd /
-mkdir huezep
-cd huezep
+# sudo su
+# cd /
+mkdir /opt/huezep
+cd /opt/huezep
 
 gsbucket="$(/usr/share/google/get_metadata_value attributes/gs-bucket-name)"
 echo $gsbucket
-gsutil cp gs://$gsbucket/metadata.config /huezep/
+gsutil cp gs://$gsbucket/metadata.config /opt/huezep/
 . metadata.config
 
 
-gsutil cp -r gs://$gsbucket/* /huezep/
+gsutil cp -r gs://$gsbucket/* /opt/huezep/
 
 # target="$(/usr/share/google/get_metadata_value attributes/target-dataproc-cluster)-m"
 # echo $target
@@ -30,16 +30,23 @@ chmod 777 launch-agent.sh
 # cd /usr/local/share/google/dataproc
 # chmod 777 startup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
 # ./startup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
+<<<<<<< HEAD
+=======
+script_image=$(grep -m 1 STARTUP_SCRIPT_LOCATION /usr/local/share/google/dataproc/launch-agent.sh | awk -F= {'print $2'})
+chmod 777 $script_image
+exec $script_image
+
+>>>>>>> 469278ad80de98fba277fcb0e70d1a4427f682d4
+
 script_image=$(grep -m 1 STARTUP_SCRIPT_LOCATION /usr/local/share/google/dataproc/launch-agent.sh | awk -F= {'print $2'})
 chmod 777 $script_image
 exec $script_image
 
 
 
-
-gsutil cp gs://$gsbucket/zeppelin.sh /huezep/
-gsutil cp gs://$gsbucket/hue.sh /huezep/
-cd /huezep
+gsutil cp gs://$gsbucket/zeppelin.sh /opt/huezep/
+gsutil cp gs://$gsbucket/hue.sh /opt/huezep/
+cd /opt/huezep
 chmod 777 hue.sh
 ./hue.sh
 # bash -v hue.sh
