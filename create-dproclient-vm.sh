@@ -29,12 +29,13 @@ gcloud dataproc clusters create ${YOUR_CLIENT} \
   --master-boot-disk-size 200 --image-version 1.3-deb9 \
   --tags $YOUR_CLIENT_TAG --project $YOUR_PROJECT \
   --service-account $YOUR_SERVICE_ACCOUNT \
-  --metadata=target-dataproc-cluster=${YOUR_TARGET_CLUSTER},gs-bucket-name=${YOUR_BUCKET}
+  --metadata=target-dataproc-cluster=${YOUR_TARGET_CLUSTER},gs-bucket-name=${YOUR_BUCKET} \
+  --initialization-actions=gs://${YOUR_BUCKET}/install-client.sh \
 #     --optional-components=ZEPPELIN \
  
- . metadata.config
+# . metadata.config
  
- gcloud compute --project ${YOUR_PROJECT} ssh --zone ${YOUR_ZONE} ${YOUR_CLIENT}-m --command 'bash -s' < /$PWD/install-client.sh
+ # gcloud compute --project ${YOUR_PROJECT} ssh --zone ${YOUR_ZONE} ${YOUR_CLIENT}-m --command 'bash -s' < /$PWD/install-client.sh
  
  
 

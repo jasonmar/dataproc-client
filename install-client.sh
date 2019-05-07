@@ -20,12 +20,12 @@ gsutil cp -r gs://$gsbucket/* /opt/huezep/
 # echo $script
 
 chmod 777 startup.sh
-./startup.sh 
+./startup.sh
 
 
-cd /usr/local/share/google/dataproc  
-chmod 777 launch-agent.sh 
-./launch-agent.sh 
+cd /usr/local/share/google/dataproc
+chmod 777 launch-agent.sh
+./launch-agent.sh
 
 # cd /usr/local/share/google/dataproc
 # chmod 777 startup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
@@ -34,6 +34,8 @@ chmod 777 launch-agent.sh
 script_image=$(grep -m 1 STARTUP_SCRIPT_LOCATION /usr/local/share/google/dataproc/launch-agent.sh | awk -F= {'print $2'})
 chmod 777 $script_image
 exec $script_image
+
+
 
 gsutil cp gs://$gsbucket/zeppelin.sh /opt/huezep/
 gsutil cp gs://$gsbucket/hue.sh /opt/huezep/
