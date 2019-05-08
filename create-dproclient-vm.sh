@@ -21,7 +21,9 @@ else \
 echo 'success'; \
 fi
 
-gsutil -m cp -r * gs://${YOUR_BUCKET}
+gsutil -m cp -r /$PWD/util/* gs://${YOUR_BUCKET}
+gsutil -m cp create-dproclient-vm.sh gs://${YOUR_BUCKET}
+gsutil -m cp metadata.config gs://${YOUR_BUCKET}
 
 gcloud dataproc clusters create ${YOUR_CLIENT} \
   --region $YOUR_REGION --subnet $YOUR_NETWORK --zone $YOUR_ZONE \
