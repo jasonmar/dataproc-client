@@ -38,7 +38,7 @@ Replace the following placeholders:
 [create-dproclient-from-img.sh](create-dproclient-from-img.sh)
 
 ```sh
-./create-dproclient-vm-from-img.sh
+./create-dproclient-from-img.sh
 ```
 
 
