@@ -26,11 +26,11 @@ cd dataproc-client-vm-startup/from-img
 
 Replace the following placeholders:
 
-* `my-project` project name
-* `my-dataproc-client`
-* `my-service-account` email address if your GCP service account
-* `my-dataproc-cluster` name of the dataproc cluster you want to create a client for
-* `my-bucket` GCS bucket
+* `your-project` your project name
+* `your-dataproc-client` your client that the VM will connect to
+* `your-image` the VM image that will be used
+* `your-service-account` email address if your GCP service account
+* `your-dataproc-cluster` name of the dataproc cluster you want to create a client for
 
 
 4. Run setup script
