@@ -60,7 +60,7 @@ Create a JDBC interpreter connecting Zeppelin with the remote Dataproc cluster:
 
 7. Access Spark Web UI
 
-[http://localhost:8888](http://localhost:18080)
+[http://localhost:18080](http://localhost:18080)
 
 
 
