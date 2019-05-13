@@ -172,14 +172,14 @@ EOF
 
 function main() {
   # Determine the role of this node
-  local role=$(/usr/share/google/get_metadata_value attributes/dataproc-role)
-  # Only run on the master node of the cluster
-  if [[ "${role}" == 'Master' ]]; then
+  # local role=$(/usr/share/google/get_metadata_value attributes/dataproc-role)
+  # # Only run on the master node of the cluster
+  # if [[ "${role}" == 'Master' ]]; then
     update_apt_get || err "Unable to update apt-get"
     install_hue_and_configure || err "Hue install process failed"
-  else
-    return 0 || err "Hue can be installed only on master node - skipped for worker node"
-  fi
+  # else
+  #   return 0 || err "Hue can be installed only on master node - skipped for worker node"
+  # fi
 }
 
 main

@@ -135,12 +135,12 @@ function configure_zeppelin(){
 }
 
 function main() {
-  if [[ "${ROLE}" == 'Master' ]]; then
+  # if [[ "${ROLE}" == 'Master' ]]; then
     update_apt_get || err 'Failed to update apt-get'
     install_zeppelin
     configure_zeppelin
     systemctl restart zeppelin
-  fi
+  # fi
 }
 
 main
