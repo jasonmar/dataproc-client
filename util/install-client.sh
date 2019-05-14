@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# sudo su
-# cd /
+sudo su
+cd /
 mkdir /opt/huezep
 cd /opt/huezep
 
