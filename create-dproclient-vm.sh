@@ -37,7 +37,7 @@ gcloud dataproc clusters create ${YOUR_CLIENT} \
  
 # . metadata.config
  
- # gcloud compute --project ${YOUR_PROJECT} ssh --zone ${YOUR_ZONE} ${YOUR_CLIENT}-m --command 'bash -s' < /$PWD/install-client.sh
+ # gcloud compute --project ${YOUR_PROJECT} ssh --zone ${YOUR_ZONE} ${YOUR_CLIENT}-m --command 'bash -s' < /$PWD/util/install-client.sh
  
  
 
