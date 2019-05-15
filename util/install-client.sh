@@ -34,7 +34,7 @@ sudo ./launch-agent.sh |& tee -a /huezep/output.txt
 
 script_image=$(grep -m 1 STARTUP_SCRIPT_LOCATION /usr/local/share/google/dataproc/launch-agent.sh | awk -F= {'print $2'})
 sudo chmod 777 $script_image
-sudo exec $script_image |& tee -a /opt/huezep/output.txt
+exec $script_image |& tee -a /opt/huezep/output.txt
 
 
 
