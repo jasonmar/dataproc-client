@@ -4,7 +4,7 @@
 
 chmod 777 create-startup.sh
 
-./create-startup.sh ${YOUR_TARGET_CLUSTER} > startup-script.sh
+./create-startup.sh ${YOUR_TARGET_CLUSTER} $YOUR_PROJECT > startup-script.sh
 
 gcloud compute --project=$YOUR_PROJECT instances create ${YOUR_CLIENT} \
  --zone=$YOUR_ZONE --machine-type=n1-standard-1 --subnet=$YOUR_NETWORK \
