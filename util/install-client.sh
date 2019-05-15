@@ -28,21 +28,21 @@ sudo gsutil cp -r gs://$gsbucket/* /opt/huezep/ |& sudo tee -a /opt/huezep/outpu
 
 # sudo chmod 777 /usr/local/share/google/dataproc/bdutil/bdutil_env.sh 
 
-sudo su chmod 777 startup.sh |& sudo tee -a /opt/huezep/output.txt
-sudo su  ./startup.sh |& sudo tee -a /opt/huezep/output.txt 
+sudo chmod 777 startup.sh |& sudo tee -a /opt/huezep/output.txt
+sudo  ./startup.sh |& sudo tee -a /opt/huezep/output.txt 
 
 
 cd /usr/local/share/google/dataproc
-sudo su chmod 777 launch-agent.sh |& sudo tee -a /opt/huezep/output.txt
-sudo su ./launch-agent.sh |& sudo tee -a opt/huezep/output.txt
+sudo chmod 777 launch-agent.sh |& sudo tee -a /opt/huezep/output.txt
+sudo ./launch-agent.sh |& sudo tee -a /opt/huezep/output.txt
 
 # cd /usr/local/share/google/dataproc
 # chmod 777 startup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
 # ./startup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
 
 script_image=$(grep -m 1 STARTUP_SCRIPT_LOCATION /usr/local/share/google/dataproc/launch-agent.sh | awk -F= {'print $2'})
-sudo su chmod 777 $script_image |& sudo tee -a /opt/huezep/output.txt
-sudo su exec $script_image |& sudo tee -a /opt/huezep/output.txt
+sudo chmod 777 $script_image |& sudo tee -a /opt/huezep/output.txt
+exec $script_image |& sudo tee -a /opt/huezep/output.txt
 
 
 
@@ -50,13 +50,13 @@ sudo su exec $script_image |& sudo tee -a /opt/huezep/output.txt
 #sudo gsutil cp gs://$gsbucket/hue.sh /opt/huezep/
 
 cd /opt/huezep
-sudo su chmod 777 hue.sh |& sudo tee -a /opt/huezep/output.txt
-sudo su ./hue.sh |& sudo tee -a /opt/huezep/output.txt
+sudo chmod 777 hue.sh |& sudo tee -a /opt/huezep/output.txt
+sudo ./hue.sh |& sudo tee -a /opt/huezep/output.txt
 # bash -v hue.sh
 # bash zeppelin.sh
 
-sudo su chmod 777 zeppelin.sh |& sudo tee -a /opt/huezep/output.txt
-sudo su ./zeppelin.sh |& sudo tee -a /opt/huezep/output.txt
+sudo chmod 777 zeppelin.sh |& sudo tee -a /opt/huezep/output.txt
+sudo ./zeppelin.sh |& sudo tee -a /opt/huezep/output.txt
 
 . metadata.config
 
