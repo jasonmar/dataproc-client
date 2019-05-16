@@ -1,10 +1,6 @@
 #!/bin/bash
 
 
-#clonedir=dataproc-client-vm
-#git clone https://github.com/JessieJingxuGao/dataproc-client-vm-startup $clonedir
-#cd $clonedir
-
 . metadata.config
 
 gsutil mb -p ${YOUR_PROJECT} -c ${YOUR_STORAGE_CLASS} gs://${YOUR_BUCKET}
