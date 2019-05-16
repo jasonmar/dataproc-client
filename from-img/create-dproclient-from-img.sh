@@ -9,7 +9,6 @@ chmod 777 create-startup.sh
 
 gcloud compute --project=$YOUR_PROJECT instances create ${YOUR_CLIENT} \
  --zone=$YOUR_ZONE --machine-type=${IMG_MACHINE_TYPE} --subnet=$YOUR_NETWORK \
- --network-tier=PREMIUM --maintenance-policy=MIGRATE \
  --service-account=$YOUR_SERVICE_ACCOUNT \
  --scopes=https://www.googleapis.com/auth/cloud-platform \
  --tags=$YOUR_CLIENT_TAG --image=${YOUR_IMAGE} \
