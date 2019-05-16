@@ -28,6 +28,9 @@ sudo gsutil cp -r gs://$gsbucket/* /opt/huezep/ |& sudo tee -a /opt/huezep/outpu
 
 # sudo chmod 777 /usr/local/share/google/dataproc/bdutil/bdutil_env.sh 
 
+
+sudo su
+
 sudo chmod 777 startup.sh |& sudo tee -a /opt/huezep/output.txt
 sudo  ./startup.sh |& sudo tee -a /opt/huezep/output.txt 
 
@@ -36,14 +39,32 @@ cd /usr/local/share/google/dataproc
 sudo chmod 777 launch-agent.sh |& sudo tee -a /opt/huezep/output.txt
 sudo ./launch-agent.sh |& sudo tee -a /opt/huezep/output.txt
 
+
+
 # cd /usr/local/share/google/dataproc
-# chmod 777 startup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
-# ./startup-script-cloud_datarefinery_image_20190228_nightly-RC01.sh
+# sudo chmod 777 startup-script-cloud_datarefinery_image_20190510_nightly-RC01.sh |& sudo tee -a /opt/huezep/output.txt
+#sudo ./startup-script-cloud_datarefinery_image_20190510_nightly-RC01.sh |& sudo tee -a /opt/huezep/output.txt
+
+
 
 script_image=$(grep -m 1 STARTUP_SCRIPT_LOCATION /usr/local/share/google/dataproc/launch-agent.sh | awk -F= {'print $2'})
 sudo chmod 777 $script_image |& sudo tee -a /opt/huezep/output.txt
+
+
+
+# export BDUTIL_DIR=/usr/local/share/google/dataproc/bdutil 
+# echo ${BDUTIL_DIR}
+# ex -sc '2i|BDUTIL_DIR=/usr/local/share/google/dataproc/bdutil' -cx $script_image
+# ex -sc '3i|echo ${BDUTIL_DIR}' -cx $script_image
+
+
+# sudo -u root  
+# sudo su |& sudo tee -a /opt/huezep/output.txt 
 exec $script_image |& sudo tee -a /opt/huezep/output.txt
 
+exit
+
+# exit |& sudo tee -a /opt/huezep/output.txt
 
 
 # sudo gsutil cp gs://$gsbucket/zeppelin.sh /opt/huezep/
