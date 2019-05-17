@@ -120,7 +120,7 @@ It may be a simple fix to match the python env on both machines after the client
 
 4. Validate the success criterion have been met
 - Test Hive CLI: User should be able to query tables stored on master Dataproc hive server
-- Test Spark Shell ( `spark-shell` for scala and `pyspark` for python): The job submitted on client VM should be shown on master Dataproc spark history-server UI (http://<spark_host_ip>:18080)
+- Test Spark Shell ( `spark-shell` for scala and `pyspark` for python): Note that it might take a while to initiate the shell. The job submitted on client VM should be shown on master Dataproc spark history-server UI (http://<spark_host_ip>:18080) - but it may only be shown after `exit()` the shell. 
 - Test spark-submit: The job submitted on client VM should be shown on master Dataproc spark history-server UI (http://<spark_host_ip>:18080)
 - Test running Hive Query from Zeppelin: User should be able to query tables stored on master Dataproc hive server
 - Test running Hive Query from Hue: User should be able to query tables stored on master Dataproc hive server
