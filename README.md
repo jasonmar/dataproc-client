@@ -38,7 +38,7 @@ Replace the following placeholders:
 * `YOUR_NETWORK ` The network to be used for the client VM
 
 
-4. Run setup script
+4. Run setup script. This will create a Dataproc Client VM that is pointed to the first server.
 
 [create-dproclient-vm.sh](create-dproclient-vm.sh)
 
@@ -77,7 +77,7 @@ Replace the following placeholders:
 
 
 
-8. Run setup script
+8. Run setup script. This will create another VM (Compute Egngine) that is pointed to the new server.
 
 [create-dproclient-from-img.sh](create-dproclient-from-img.sh)
 
@@ -107,20 +107,24 @@ Create a JDBC interpreter connecting Zeppelin with the remote Dataproc cluster:
 
 The [create-dproclient-vm.sh](create-dproclient-vm.sh) contains the the following
 
-- gcloud command that starts a Dataproc cluster serving as the image to be used to create the the final client VM, with Cloud storage bucket name used to store those configurations files passed to the client environment. 
-
-- SSH into the Dataproc client VM and run [install-client.sh](install-client.sh) 
+- create a Cloud storage bucket used to store those configurations files passed to the client dataproc . 
+- gcloud command that starts a Dataproc cluster 
+- gcloud command that will SSH into the Dataproc client VM and run [util/install-client.sh](util/install-client.sh)
 
 The [util/install-client.sh](util/install-client.sh) constains the following
 
 - Installation of Hue and Zeppeline on it. The [zeppelin.sh](zeppelin.sh) and [hue.sh](hue.sh) scripts are the [initialization-actions bash files](https://github.com/GoogleCloudPlatform/dataproc-initialization-actions) provided by Google, which will initilze Zeppelin and Hue 
 
-
-The [from-img/create-startup.sh](from-img/create-startup.sh) will create the [from-img/startup-script.sh](from-img/startup-script.sh) 
-
 - replace the hostnames in the Hadoop, Yarn, Hive, Spark files with the hostname with the hostname of the remote target server dataproc cluster. Thus, when starting `hive`, `spark-shell`, , `spark-submit`, the session will be created on the remote cluster instead of locally.
 
 - swap the `/etc/hue/conf/hue.ini` hive_server_host setting to the target dataproc cluster instead of the local and also uncommented the hive_server_port configuration that are needed to have hue running query successfully.
+
+
+The [from-img/create-startup.sh](from-img/create-startup.sh) will create the [from-img/startup-script.sh](from-img/startup-script.sh) that include contents of the following
+
+- replace the old target (server) cluster names in the Hadoop, Yarn, Hive, Spark files with the new cluster name of the remote target server dataproc cluster. Thus, when starting `hive`, `spark-shell`, , `spark-submit`, the session will be created on the remote cluster instead of locally.
+
+- swap the `/etc/hue/conf/hue.ini` hive_server_host setting to the new target dataproc cluster instead of the old target.
 
 - Note: The Zeppelin configurations needed to allow Zeppelin to connect with the target dataproc hive server are set in step #6 above through web server UI.  
 
@@ -128,7 +132,7 @@ The [from-img/create-dproclient-from-img.sh](from-img/create-dproclient-from-img
 
 - read the [from-img/metadata.config](from-img/metadata.config) to get the metadata and run the [from-img/create-startup.sh](from-img/create-startup.sh) to create the [from-img/startup-script.sh](from-img/startup-script.sh) 
 
-- gcloud command that starts the client VM using image 
+- gcloud command that starts a new client VM (compute engine) using image 
 
 
 *Note: The following error can be ignored:*
