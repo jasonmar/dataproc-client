@@ -1,9 +1,6 @@
 #!/bin/bash
 
 
-#clonedir=dataproc-client-vm
-#git clone https://github.com/JessieJingxuGao/dataproc-client-vm-startup $clonedir
-#cd $clonedir
 
 . metadata.config
 
@@ -33,11 +30,8 @@ gcloud dataproc clusters create ${YOUR_CLIENT} \
   --service-account $YOUR_SERVICE_ACCOUNT \
   --metadata=target-dataproc-cluster=${YOUR_TARGET_CLUSTER},gs-bucket-name=${YOUR_BUCKET} 
 #  --initialization-actions=gs://${YOUR_BUCKET}/install-client.sh \
-#     --optional-components=ZEPPELIN \
  
-# . metadata.config
- 
-gcloud compute --project ${YOUR_PROJECT} ssh --zone ${YOUR_ZONE} ${YOUR_CLIENT}-m --command 'sudo bash -s' < /$PWD/util/install-client.sh >> output.txt
+gcloud compute --project ${YOUR_PROJECT} ssh --zone ${YOUR_ZONE} ${YOUR_CLIENT}-m --command 'sudo bash -s' < /$PWD/util/install-client.sh >> local-output.txt
  
  
 
