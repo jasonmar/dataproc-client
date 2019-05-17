@@ -102,6 +102,8 @@ Create a JDBC interpreter connecting Zeppelin with the remote Dataproc cluster:
 [http://localhost:8888](http://localhost:8888)
 
 
+*Note that as the new client VM has startup script that needs to run during execution, even though processes may look complete in the terminal or the Cloud Console may appear to have the VM set up completely, the startup script may still be running (you can check serial log port output to see the status). So it might require more time for the configurations and UI to be fully done.*
+
 
 ## How this works
 
@@ -126,7 +128,7 @@ The [from-img/create-startup.sh](from-img/create-startup.sh) will create the [fr
 
 - swap the `/etc/hue/conf/hue.ini` hive_server_host setting to the new target dataproc cluster instead of the old target.
 
-- Note: The Zeppelin configurations needed to allow Zeppelin to connect with the target dataproc hive server are set in step #6 above through web server UI.  
+- Note: The Zeppelin configurations needed to allow Zeppelin to connect with the target dataproc hive server are set in step #9 above through web server UI.  
 
 The [from-img/create-dproclient-from-img.sh](from-img/create-dproclient-from-img.sh) will do the following
 
