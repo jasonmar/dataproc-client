@@ -18,7 +18,7 @@ Supported clients:
 1. Change working directory to repository root
 
 ```sh
-cd dataproc-client
+cd dataproc-client-vm-startup
 ```
 
 
@@ -39,11 +39,39 @@ Replace the following placeholders:
 
 4. Run setup script
 
-[create-dproclient.sh](create-dproclient.sh)
+[create-dproclient-vm.sh](create-dproclient-vm.sh)
 
 ```sh
 ./create-dproclient-vm.sh
 ```
+
+5. Create an image using the just created single-nodel Dataproc VM disk, with name for example "dproclient-image"
+
+6. Change working directory to from-img sub-folder
+
+```sh
+cd dataproc-client-vm-startup/from-img
+```
+
+7. Modify [metadata.config](metadata.config)
+
+Replace the following placeholders:
+
+* `your-project` your project name
+* `your-dataproc-client` your client that the VM will connect to
+* `your-image` the VM image created ni step 5 that will be used, for example "dproclient-image"
+* `your-service-account` email address if your GCP service account
+* `your-dataproc-cluster` name of the dataproc cluster you want to create a client for
+
+
+8. Run setup script
+
+[create-dproclient-from-img.sh](create-dproclient-from-img.sh)
+
+```sh
+./create-dproclient-from-img.sh
+```
+
 
 5. Access Zeppelin web UI
 
@@ -66,15 +94,20 @@ Create a JDBC interpreter connecting Zeppelin with the remote Dataproc cluster:
 
 The [create-dproclient-vm.sh](create-dproclient-vm.sh) contains the the following
 
-- gcloud command that starts a Dataproc cluster serving as client with metadata variables for target cluster name and Cloud storage bucket name used to store those configurations files passed to the client environment. 
+- gcloud command that starts a Dataproc cluster serving as client, with Cloud storage bucket name used to store those configurations files passed to the client environment. 
 
-- SSH into the Dataproc client VM and run [install-client.sh](install-client.sh)
+- SSH into the Dataproc client VM and run [install-client.sh](install-client.sh) 
+
+The [util/install-client.sh](util/install-client.sh) will do the following
+
+- install Hue and Zeppeline on it.
 
 
 
-### Install Client script
 
-The [install-client.sh](install-client.sh) contains the the following
+The [from-img/install-client.sh](util/install-client.sh) will do the following
+
+
 
 - The [startup.sh](startup.sh) replaces the `MASTER_HOSTNAMES` variable to use the master hostname of the target dataproc cluster. Then the Dataproc created files `/usr/local/share/google/dataproc/launch-agent.sh`, `/usr/local/share/google/dataproc/startup-script*.sh` will be run install services like Hadoop NameNode, YARN Resource Manager and Hive Metastore. When the script writes configuration files, all client software references the master of the target dataproc cluster. When starting `hive`, `spark-shell`, , `spark-submit`, the session will be created on the remote cluster instead of locally.
 
