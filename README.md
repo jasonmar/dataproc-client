@@ -27,8 +27,8 @@ cd dataproc-client-vm-startup
 Replace the following placeholders:
 
 * `YOUR_PROJECT` The project name
-* `YOUR_CLIENT` The Client VM name
-* `YOUR_SERVICE_ACCOUNT` The service account (in email format like 'hive-demo@project-name.iam.gserviceaccount.com`) 
+* `YOUR_CLIENT` The Client Cluster name (DON"T include the '-m')
+* `YOUR_SERVICE_ACCOUNT` The service account (in email format like 'hive-demo@project-name.iam.gserviceaccount.com`). It should have the required access to GCP APIs/services, for example, Dataproc, Compute Engine, GCS.
 * `YOUR_BUCKET` The GCS bucket name that will be used to transfer the scripts to the client VM
 * `YOUR_STORAGE_CLASS` The storage class for the GCS bucket, multi_regional recommended as there might be different regions where the client VM might be
 * `YOUR_REGION` The region where you want to establish the client VM
@@ -57,11 +57,23 @@ cd dataproc-client-vm-startup/from-img
 
 Replace the following placeholders:
 
-* `your-project` your project name
-* `your-dataproc-client` your client that the VM will connect to
-* `your-image` the VM image created ni step 5 that will be used, for example "dproclient-image"
-* `your-service-account` email address if your GCP service account
-* `your-dataproc-cluster` name of the dataproc cluster you want to create a client for
+* `YOUR_TARGET_CLUSTER` The server Dataproc Cluster name (DON"T include the '-m') where the client VM will point to to run Hive and Spark
+* `YOUR_IMAGE` The Dataproc single-node master VM image created in step-5 that will be used to create the compute engine as client VM, for example "dproclient-image"
+* `OLD_TARGET_CLUSTER` The current target hostname in the image. It should be the VM name (for example dproclient-cluster-m) used that was used to create the image.
+* `IMG_MACHINE_TYPE` The machine type of the VM that was used to create the image. If use the current default settings in [create-dproclient-vm.sh](create-dproclient-vm.sh), then it should be "n1-standard-1".
+* `IMG_BOOT_DISK_SIZE` The boot disk size of the VM that was used to create the image. If use the current default settings in [create-dproclient-vm.sh](create-dproclient-vm.sh), then it should be "200GB".
+* `IMG_BOOT_DISK_TYPE` The boot disk type of the VM that was used to create the image. If use the current default settings in [create-dproclient-vm.sh](create-dproclient-vm.sh), then it should be "pd-standard".
+* `YOUR_PROJECT` The project name
+* `YOUR_CLIENT` The Client VM name
+* `YOUR_REGION` The region where you want to establish the client VM
+* `YOUR_ZONE` The zone where you want to establish the client VM
+* `YOUR_CLIENT_TAG ` The network tag to be used for the client VM
+* `YOUR_NETWORK ` The network to be used for the client VM
+* `YOUR_SERVICE_ACCOUNT` The service account (in email format like 'hive-demo@project-name.iam.gserviceaccount.com`) 
+
+
+
+
 
 
 8. Run setup script
