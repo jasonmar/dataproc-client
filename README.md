@@ -26,6 +26,7 @@ cd dataproc-client-vm-startup
 
 Replace the following placeholders:
 
+* `YOUR_TARGET_CLUSTER` The server Dataproc Cluster name (DON'T include the '-m') where the client VM will point to to run Hive and Spark, for example 'hiver-server'
 * `YOUR_PROJECT` The project name
 * `YOUR_CLIENT` The Client Cluster name (DON"T include the '-m'), for example "test-client-dp-demo"
 * `YOUR_SERVICE_ACCOUNT` The service account (in email format like 'hive-demo@project-name.iam.gserviceaccount.com`). It should have the required access to GCP APIs/services, for example, Dataproc, Compute Engine, GCS.
@@ -57,9 +58,9 @@ cd dataproc-client-vm-startup/from-img
 
 Replace the following placeholders:
 
-* `YOUR_TARGET_CLUSTER` The server Dataproc Cluster name (DON'T include the '-m') where the client VM will point to to run Hive and Spark
+* `YOUR_TARGET_CLUSTER` The new server Dataproc Cluster name (DON'T include the '-m') where you want the new client VM to point to to run Hive and Spark, for example 'hiver-server-bigger'
 * `YOUR_IMAGE` The Dataproc single-node master VM image created in step-5 that will be used to create the compute engine as client VM, for example "test-client-dp-demo-m-image"
-* `OLD_TARGET_CLUSTER` The Dataproc Cluster name that was used to create the image (DON'T include the '-m'), for example "test-client-dp-demo"
+* `OLD_TARGET_CLUSTER` The old server target cluster name that was used to create the image (DON'T include the '-m'), for example "hive-server"
 * `IMG_MACHINE_TYPE` The machine type of the VM that was used to create the image. If use the current default settings in [create-dproclient-vm.sh](create-dproclient-vm.sh), then it should be "n1-standard-1".
 * `IMG_BOOT_DISK_SIZE` The boot disk size of the VM that was used to create the image. If use the current default settings in [create-dproclient-vm.sh](create-dproclient-vm.sh), then it should be "200GB".
 * `IMG_BOOT_DISK_TYPE` The boot disk type of the VM that was used to create the image. If use the current default settings in [create-dproclient-vm.sh](create-dproclient-vm.sh), then it should be "pd-standard".
