@@ -35,13 +35,13 @@ gsutil -m cp create-dproclient-vm.sh gs://${YOUR_BUCKET}
 gsutil -m cp metadata.config gs://${YOUR_BUCKET}
 
 gcloud dataproc clusters create ${YOUR_CLIENT} \
-  --region $YOUR_REGION --subnet $YOUR_NETWORK --zone $YOUR_ZONE \
-  --single-node --master-machine-type n1-standard-2 \
-  --master-boot-disk-size 200 --image-version 1.3-deb9 \
-  --tags $YOUR_CLIENT_TAG --project $YOUR_PROJECT \
-  --service-account $YOUR_SERVICE_ACCOUNT \
+  --region $YOUR_REGION --subnet ${YOUR_NETWORK} --zone ${YOUR_ZONE} \
+  --single-node --master-machine-type ${MASTER_MACHINE_TYPE} \
+  --master-boot-disk-size ${MASTER_BOOT_DISK_SIZE} --image-version 1.3-deb9 \
+  --tags ${YOUR_CLIENT_TAG} --project ${YOUR_PROJECT} \
+  --service-account ${YOUR_SERVICE_ACCOUNT} \
   --metadata=target-dataproc-cluster=${YOUR_TARGET_CLUSTER},gs-bucket-name=${YOUR_BUCKET} 
-#  --initialization-actions=gs://${YOUR_BUCKET}/install-client.sh \
+#  --initialization-actions=gs://dataproc-initialization-actions/jupyter2/jupyter2.sh \
  
 gcloud compute --project ${YOUR_PROJECT} ssh --zone ${YOUR_ZONE} ${YOUR_CLIENT}-m --command 'sudo bash -s' < /$PWD/util/install-client.sh >> local-output.txt
  

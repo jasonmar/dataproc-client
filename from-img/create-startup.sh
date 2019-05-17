@@ -13,9 +13,9 @@
 # limitations under the License.
 
 #define parameters which are passed in
-YOUR_TARGET_CLUSTER=$3
-YOUR_PROJECT=$2
 OLD_TARGET_CLUSTER=$1
+YOUR_PROJECT=$2
+YOUR_TARGET_CLUSTER=$3
 YOUR_CLIENT=$4
 
 
