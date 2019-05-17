@@ -26,11 +26,15 @@ cd dataproc-client
 
 Replace the following placeholders:
 
-* `my-project` project name
-* `my-dataproc-client` 
-* `my-service-account` email address if your GCP service account
-* `my-dataproc-cluster` name of the dataproc cluster you want to create a client for
-* `my-bucket` GCS bucket
+* `YOUR_PROJECT` The project name
+* `YOUR_CLIENT` The Client VM name
+* `YOUR_SERVICE_ACCOUNT` The service account (in email format like 'hive-demo@project-name.iam.gserviceaccount.com`) 
+* `YOUR_BUCKET` The GCS bucket name that will be used to transfer the scripts to the client VM
+* `YOUR_STORAGE_CLASS` The storage class for the GCS bucket, multi_regional recommended as there might be different regions where the client VM might be
+* `YOUR_REGION` The region where you want to establish the client VM
+* `YOUR_ZONE` The zone where you want to establish the client VM
+* `YOUR_CLIENT_TAG ` The network tag to be used for the client VM
+* `YOUR_NETWORK ` The network to be used for the client VM
 
 
 4. Run setup script
