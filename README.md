@@ -94,31 +94,31 @@ Create a JDBC interpreter connecting Zeppelin with the remote Dataproc cluster:
 
 The [create-dproclient-vm.sh](create-dproclient-vm.sh) contains the the following
 
-- gcloud command that starts a Dataproc cluster serving as client, with Cloud storage bucket name used to store those configurations files passed to the client environment. 
+- gcloud command that starts a Dataproc cluster serving as the image to be used to create the the final client VM, with Cloud storage bucket name used to store those configurations files passed to the client environment. 
 
 - SSH into the Dataproc client VM and run [install-client.sh](install-client.sh) 
 
-The [util/install-client.sh](util/install-client.sh) will do the following
+The [util/install-client.sh](util/install-client.sh) constains the following
 
-- install Hue and Zeppeline on it.
-
-
+- Installation of Hue and Zeppeline on it. The [zeppelin.sh](zeppelin.sh) and [hue.sh](hue.sh) scripts are the [initialization-actions bash files](https://github.com/GoogleCloudPlatform/dataproc-initialization-actions) provided by Google, which will initilze Zeppelin and Hue 
 
 
-The [from-img/install-client.sh](util/install-client.sh) will do the following
+The [from-img/create-startup.sh](from-img/create-startup.sh) will create the [from-img/startup-script.sh](from-img/startup-script.sh) 
+
+- replace the hostnames in the Hadoop, Yarn, Hive, Spark files with the hostname with the hostname of the remote target server dataproc cluster. Thus, when starting `hive`, `spark-shell`, , `spark-submit`, the session will be created on the remote cluster instead of locally.
+
+- swap the `/etc/hue/conf/hue.ini` hive_server_host setting to the target dataproc cluster instead of the local and also uncommented the hive_server_port configuration that are needed to have hue running query successfully.
+
+- Note: The Zeppelin configurations needed to allow Zeppelin to connect with the target dataproc hive server are set in step #6 above through web server UI.  
+
+The [from-img/create-dproclient-from-img.sh](from-img/create-dproclient-from-img.sh) will do the following
+
+- read the [from-img/metadata.config](from-img/metadata.config) to get the metadata and run the [from-img/create-startup.sh](from-img/create-startup.sh) to create the [from-img/startup-script.sh](from-img/startup-script.sh) 
+
+- gcloud command that starts the client VM using image 
 
 
-
-- The [startup.sh](startup.sh) replaces the `MASTER_HOSTNAMES` variable to use the master hostname of the target dataproc cluster. Then the Dataproc created files `/usr/local/share/google/dataproc/launch-agent.sh`, `/usr/local/share/google/dataproc/startup-script*.sh` will be run install services like Hadoop NameNode, YARN Resource Manager and Hive Metastore. When the script writes configuration files, all client software references the master of the target dataproc cluster. When starting `hive`, `spark-shell`, , `spark-submit`, the session will be created on the remote cluster instead of locally.
-
-- The [zeppelin.sh](zeppelin.sh) and [hue.sh](hue.sh) scripts are the [initialization-actions bash files](initialization-actions) provided by Google, which will initilze Zeppelin and Hue 
-
-- the scripts needed to swap the `/etc/hue/conf/hue.ini` hive_server_host setting to the target dataproc cluster instead of the local and also uncommented the hive_server_port configuration that are needed to have hue running query successfully.
-
-Then, the Zeppelin configurations needed to allow Zeppelin to connect with the target dataproc hive server are set in step #6 above through web server UI.  
-
-Note: The following two errors can be ignored:
-- During the process running [hue.sh](hue.sh), Hue installation process will try to restart and hadoop-hdfs-namenode, as we have swapped the `MASTER_HOSTNAMES` with the remote Dataproc server, this will pop up error 'Unable to restart hadoop-hdfs-namenode'. It will not stop the following process and this error can be ignored.
+*Note: The following error can be ignored:*
 - When first time openning Hue web UI, the below error will pop up but can be ignored. There should be no problem running Hive queres that run on the server machine.
 `Solr server could not be contacted properly: HTTPConnectionPool(host='......', port=8983): Max retries exceeded with url: /solr/admin/info/system?user.name=hue&doAs=admin&wt=json (Caused by NewConnectionError(': Failed to establish a new connection: [Errno 111] Connection refused',))`
 
@@ -147,11 +147,10 @@ It may be a simple fix to match the python env on both machines after the client
 1. Find the Dataproc Server cluster name and the image version to be referenced in the automation script
 
 2. Decide the network tag to be used for the Dataproc client VM and use that to set up the firewall rules for the following ports to be opened.
-- Hive: 10000 (hive server),9083 (hive metastore) - client to master
-- spark: 7077 (spark master port),7078 (spark worker port) - client to master
+- Client to master connection: for example, Hive: 10000 (hive server),9083 (hive metastore), spark: 7077 (spark master port), 7078 (spark worker port) 
 - Hue web server: 8888 - user terminal to client
 - Zeppelin web server: 8080 - user terminal to client
-- Spark web server: 18080 (spark master web ui port), 18081  (spark worker web ui port) - user temrinal to master
+- Spark web server: 18080 (spark master web ui port), - user temrinal to master
 
 3. Create Client Dataproc VM with the above instructions
 
@@ -163,6 +162,14 @@ It may be a simple fix to match the python env on both machines after the client
 - Test running Hive Query from Hue: User should be able to query tables stored on master Dataproc hive server
 
 
+
+## To-do
+
+- Automate the image creation and simple the steps for usinig the package.
+
+- Image Version as input metadata that matches the server to be used to create the image  
+
+- Currently opend all ports from client to server 
 
 ## Disclaimer
 
