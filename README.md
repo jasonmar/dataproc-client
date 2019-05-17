@@ -142,7 +142,15 @@ The [from-img/create-dproclient-from-img.sh](from-img/create-dproclient-from-img
 
 ## Troubleshooting
 
-1. Unmatched python versions on server and client sides
+1. Make sure you have the server with reasonable computation power. If the server is too small, the spark shell and spart submit may take too long or have YARN warnings/errors. Below is an example of creation of a Dataproc Server with the reasonable size and related settings like tags, etc.
+
+```
+gcloud dataproc clusters create hive-server-bigger-2 --region us-east1 --subnet default --zone "" --service-account=hive-demo@<your_project>.iam.gserviceaccount.com --master-machine-type n1-standard-1 --master-boot-disk-size 500  --num-workers 2   --worker-machine-type n1-standard-1 --worker-boot-disk-size 500 --image-version 1.3-deb9 --scopes 'https://www.googleapis.com/auth/cloud-platform' --tags hive-server --project <your_project>
+```
+
+
+
+2. Unmatched python versions on server and client sides
 
 ```
 ERROR org.apache.spark.deploy.yarn.ApplicationMaster: User class threw exception: java.io.IOException: Cannot run program "/opt/conda/default/bin/python": error=2, No such file or directory
