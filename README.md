@@ -85,7 +85,7 @@ Replace the following placeholders:
 ```
 
 
-5. Access Zeppelin web UI
+9. Access Zeppelin web UI hosted on the just created Client VM
 
 [http://localhost:8080](http://localhost:8080)
 
@@ -96,7 +96,7 @@ Create a JDBC interpreter connecting Zeppelin with the remote Dataproc cluster:
 - `artifacts` -> `org.apache.hive:hive-jdbc:0.14.0 & org.apache.hadoop:hadoop-common:2.6.0`
 
 
-6. Access Hue Web UI
+10. Access Hue Web UI hosted on the just created Client VM
 
 [http://localhost:8888](http://localhost:8888)
 
