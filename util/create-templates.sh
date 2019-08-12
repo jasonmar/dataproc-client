@@ -11,18 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#!/usr/bin/env bash
 
-YOUR_CLIENT=test-client-dp-demo-4
-YOUR_TARGET_CLUSTER=hive-server-bigger-2
-YOUR_PROJECT=albatross-kvasilakakis-sandbox
-YOUR_REGION=us-east1
-YOUR_ZONE=us-east1-b
-YOUR_BUCKET=test-client-dp-demo-4
-YOUR_SERVICE_ACCOUNT=hive-demo@albatross-kvasilakakis-sandbox.iam.gserviceaccount.com
-YOUR_NETWORK=default
-YOUR_CLIENT_TAG=hive-client
-YOUR_STORAGE_CLASS=multi_regional
+# run as root
 
+DATAPROC_MASTER=$(/usr/share/google/get_metadata_value attributes/dataproc-master)
 
-MASTER_MACHINE_TYPE=n1-standard-2
-MASTER_BOOT_DISK_SIZE=200
+# Creates configuration templates
+for f in $(cat /usr/share/google/config-files); do
+  if [ -f "${f}" ]; then
+    echo "Creating template: ${f}"
+    sed -e "s|${DATAPROC_MASTER}|{{ DATAPROC_MASTER }}|g" "${f}" > "${f}.template"
+  fi
+done

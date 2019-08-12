@@ -12,18 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-YOUR_TARGET_CLUSTER=hive-server-bigger
-YOUR_CLIENT=test-client-vm-demo-4
-YOUR_PROJECT=albatross-kvasilakakis-sandbox
-YOUR_REGION=us-east1
-YOUR_ZONE=us-east1-b
-YOUR_SERVICE_ACCOUNT=hive-demo@albatross-kvasilakakis-sandbox.iam.gserviceaccount.com
-YOUR_NETWORK=default
-YOUR_CLIENT_TAG=hive-client
+[Unit]
+Description=Configures edge node to use target Dataproc cluster
+After=network.target
 
+[Service]
+Type=oneshot
+User=root
+Group=root
+ExecStart=/bin/bash /usr/share/google/configure.sh
 
-YOUR_IMAGE=test-client-dp-demo-4-m-image
-OLD_TARGET_CLUSTER=hive-server-bigger-2
-IMG_MACHINE_TYPE=n1-standard-1
-IMG_BOOT_DISK_SIZE=200GB
-IMG_BOOT_DISK_TYPE=pd-standard
+[Install]
+WantedBy=multi-user.target
