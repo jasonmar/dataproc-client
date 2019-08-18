@@ -25,6 +25,8 @@ SRC_IMAGE_PROJECT=cloud-dataproc
 SRC_IMAGE_NAME=dataproc-1-4-deb9-20190809-000000-rc01
 # Uncomment the line below to use latest GA image
 #DATAPROC_VERSION=1.4-debian9
+# Uncomment the line below to install Anaconda and Jupyter
+#OPTIONAL_COMPONENTS=ANACONDA,JUPYTER
 BUCKET=gsztest
 STORAGE_CLASS=multi_regional
 DEST_IMAGE_FAMILY=edgenode-1-4-deb9

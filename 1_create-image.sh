@@ -51,6 +51,12 @@ else
   IMAGE="--image projects/${SRC_IMAGE_PROJECT}/global/images/${SRC_IMAGE_NAME}"
 fi
 
+if [ ! -z "$OPTIONAL_COMPONENTS"]; then
+  COMPONENTS="--optional-components $OPTIONAL_COMPONENTS"
+else
+  COMPONENTS=""
+fi
+
 gcloud dataproc clusters create "${CLUSTER_NAME}" \
   --single-node \
   --no-address \
@@ -63,7 +69,7 @@ gcloud dataproc clusters create "${CLUSTER_NAME}" \
   --master-boot-disk-size "${BOOT_DISK_SIZE}" \
   --master-boot-disk-type "${BOOT_DISK_TYPE}" \
   --tags "${CLIENT_TAGS}" \
-  --optional-components="ANACONDA,JUPYTER" \
+  $COMPONENTS \
   --service-account "${SERVICE_ACCOUNT}" \
   --metadata="config-bucket=${BUCKET},startup-script-url=gs://${BUCKET}/edge-node-startup-script.sh"
 

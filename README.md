@@ -1,6 +1,8 @@
 # Dataproc Edge Node
 
-This repository provides scripts for creating Dataproc Edge Nodes.
+This repository provides scripts for creating Dataproc Edge Nodes in two steps.
+Step 1 creates a Dataproc cluster, installs a configuration script, and captures a VM Image.
+Step 2 launches a GCE VM Instance from the image created by Step 1.
 
 
 ## What is an Edge Node?
@@ -19,13 +21,13 @@ Because an edge node is not an active member of the cluster and does not execute
 ### Image Creation
 
 1. Modify [image_env](image_env) to configure variables used to create a template Dataproc cluster
-2. Run `create-image.sh` to launch a template Dataproc cluster and capture an image
+2. Run `1_create-image.sh` to launch a template Dataproc cluster and capture an image
 
 ### Edge Node Launch
 
 1. Modify [edgenode_env](edgenode_env) to configure variables used to create a Dataproc Edge 
 Node
-2. Run `launch-edgenode.sh` to launch a GCE VM Instance from the edgenode image.
+2. Run `2_launch-edgenode.sh` to launch a GCE VM Instance from the edgenode image.
 
 
 ## Supported clients
@@ -38,6 +40,12 @@ Node
 * HDFS
 * YARN
 * Hadoop
+
+
+## Known Issues
+
+* MapReduce applications have issues contacting the YARN Timeline Server when using the default Dataproc configuration. If you experience this issue, disable the YARN Timeline Server.
+* Some configuration settings are calculated by Dataproc cluster size at cluster creation time, so if you use the values from a small single-node cluster your jobs may be under-sized by default. You will need to copy values from your actual Dataproc cluster in order to avoid underutilization.
 
 
 ## How it works
